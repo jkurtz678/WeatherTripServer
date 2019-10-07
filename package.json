@@ -5,14 +5,17 @@
   "main": "index.js",
   "engines": {
     "node": "8.8.1",
-    "npm" : "5.0.3"
+    "npm": "5.0.3"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Jackson Kurtz <jkurtz678@gmail.com> (https://jacksonkurtz.com)",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.3"
   }
 }
