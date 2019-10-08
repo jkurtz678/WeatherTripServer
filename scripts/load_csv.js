@@ -2,7 +2,7 @@ const csv_parser = require("csv-parser");
 const fs = require("fs");
 
 //loads csv from given path
-module.exports = function loadCSV(csv_path) {
+module.exports = function loadCSV(csv_path, callback) {
 	console.log("Loading csv...");
 	const entry_rows = [];
 	fs.createReadStream(csv_path)
@@ -15,6 +15,6 @@ module.exports = function loadCSV(csv_path) {
 			/*
 			const ventura = us_cities.filter(entry => entry.city == "Ventura");
 			console.log("ventura:", ventura[0]["population"]);*/
-			return entry_rows;
+			callback(entry_rows);
 		});
 }
