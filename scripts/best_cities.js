@@ -1,14 +1,22 @@
 //deletes duplicates and cleans city name of "-"
 function cleanCities(cities) {
-	//remove duplicates
-	const unique_cities_set = new Set(cities.map(c => JSON.stringify(c)));
-	const unique_cities = Array.from(unique_cities_set).map(c => JSON.parse(c));
+	//remove duplicates city-state pairs
+	const unique_cities = [];
 
+	for (city of cities) {
+		const same_cities = unique_cities.filter(
+			u_city => u_city.city === city.city && u_city.state === city.state
+		);
+		if (same_cities.length === 0) {
+			unique_cities.push(city);
+		}
+	}
 	//remove chars after and including '-'
 	const new_cities = unique_cities.map(c => {
 		c["city"] = c["city"].split("-")[0];
 		return c;
 	});
+	console.log("cities after clean:", new_cities);
 	return new_cities;
 }
 
@@ -37,8 +45,8 @@ function assembleCities(cities) {
 	//remove first and last for start and end locations
 	const start = cities.splice(0, 1);
 	const destination = cities.splice(cities.length - 1, 1);
-	console.log("start:", start);
-	console.log("destination:", destination);
+	//console.log("start:", start);
+	//console.log("destination:", destination);
 
 	//find three largest cities, and maintain order
 	cities.sort((a, b) => {
@@ -60,9 +68,12 @@ function assembleCities(cities) {
 
 //keeps first and last and returns largest cities in between
 function getBestCities(cities, us_cities_data) {
+	console.log("cleaning city list...");
 	const cleaned_cities = cleanCities(cities);
+	console.log("getting population data...");
 	const population_cities = addPopulations(cleaned_cities, us_cities_data);
+	console.log("assembling response");
 	return assembleCities(population_cities);
-};
+}
 
 module.exports = getBestCities;
