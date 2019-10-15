@@ -1,3 +1,5 @@
 node_modules
 keys.js
 WeatherTrip
+.DS_Store
+data/.DS_Store
