@@ -1,5 +1,6 @@
 node_modules
 keys.js
+darksky.js
 WeatherTrip
 .DS_Store
 data/.DS_Store
