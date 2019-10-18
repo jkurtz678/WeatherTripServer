@@ -37,7 +37,7 @@ function extractTime(timestamp) {
 }
 
 function getMiles(i) {
-	return Math.round(i * 0.000621371192 * 10) / 10;
+	return Math.round(i * 0.000621371192);
 }
 
 function getRouteMetrics(best_cities, callback) {

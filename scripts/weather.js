@@ -24,7 +24,7 @@ async function getWeather(cities, callback) {
 	console.log("adding weather data to cities...");
 	for (let [index, res] of weatherResults.entries()) {
 		cities[index]["temp"] = 
-			(Math.round(parseFloat(res.data.currently.temperature) * 10) / 10
+			(Math.round(parseFloat(res.data.currently.temperature))
 		).toString();
 		cities[index]["summary"] = res.data.currently.summary;
 		cities[index]["icon"] = res.data.currently.icon;
