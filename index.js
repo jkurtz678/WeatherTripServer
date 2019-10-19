@@ -16,7 +16,7 @@ loadCSV(cities_csv, cities_data => {
 		//express will serve up the index.html file if it doesn't recognize the route
 		const path = require("path");
 		app.get("*", (req, res) => {
-			res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')
+			res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 		});
 	}
 	console.log("Attatched routes.");
