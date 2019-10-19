@@ -25,9 +25,13 @@ function extractTime(timestamp) {
 	const date = timestamp.substring(0, start-1);
 	let [hr, min] = military.split(":");
 	let period = "am";
+
+	if(parseInt(hr) > 11) {
+		period = "pm";
+	}
+
 	if (parseInt(hr) > 12) {
 		hr = hr % 12;
-		period = "pm";
 	}
 
 	if (hr === "00") {

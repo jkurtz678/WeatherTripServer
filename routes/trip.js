@@ -68,6 +68,14 @@ module.exports = (app, uscities) => {
 		const best_cities = [
 			{
 				city: "Los Angeles",
+				date: "2019-10-18",
+				distance: 50,
+				icon: "clear-day",
+				temp: 76,
+				order: 0,
+				summary: "clear",
+				time: "3:47pm",
+				military_time: "15:47",
 				state: "CA",
 				latitude: 34.05223,
 				longitude: -118.24335,
@@ -76,30 +84,63 @@ module.exports = (app, uscities) => {
 			{
 				city: "Simi Valley",
 				state: "CA",
+				temp: 76,
 				latitude: 34.28734,
 				longitude: -118.79931,
-				population: "127864.0"
+				population: "127864.0",
+				date: "2019-10-18",
+				distance: 50,
+				icon: "clear-day",
+				order: 0,
+				summary: "clear",
+				time: "3:47pm",
+				military_time: "15:47"
+
 			},
 			{
 				city: "Santa Barbara",
 				state: "CA",
 				latitude: 34.44093,
+				temp: 76,
 				longitude: -119.75532,
-				population: "204034.0"
+				population: "204034.0",
+				date: "2019-10-18",
+				distance: 50,
+				icon: "clear-day",
+				order: 0,
+				summary: "clear",
+				time: "3:47pm",
+				military_time: "15:47"
 			},
 			{
 				city: "Santa Maria",
 				state: "CA",
 				latitude: 34.88008,
 				longitude: -120.4087,
-				population: "140219.0"
+				temp: 76,
+				population: "140219.0",
+				date: "2019-10-18",
+				distance: 50,
+				icon: "clear-day",
+				order: 0,
+				summary: "clear",
+				time: "3:47pm",
+				military_time: "15:47"
 			},
 			{
 				city: "San Luis Obispo",
 				state: "CA",
 				latitude: 35.28261,
 				longitude: -120.66002,
-				population: "62398.0"
+				temp: 76,
+				population: "62398.0",
+				date: "2019-10-18",
+				distance: 50,
+				icon: "clear-day",
+				order: 0,
+				summary: "clear",
+				time: "3:47pm",
+				military_time: "15:47"
 			}
 		];
 		getRouteMetrics(best_cities, routeMetrics => {
