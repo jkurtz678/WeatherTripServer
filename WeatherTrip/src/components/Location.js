@@ -42,7 +42,7 @@ const locationConfig = location => {
 			distanceLabel: (
 				<div>
 					<h3>{location.distance} mi</h3>
-					<h3>Destination</h3>
+					<h3>End</h3>
 				</div>
 			),
 			timeBubbleStyle: {

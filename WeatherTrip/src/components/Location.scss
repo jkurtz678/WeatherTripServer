@@ -60,15 +60,25 @@
 	h3 {
 		font-size: 1.6em;
 	}
+
+	@media only screen and (max-width: 450px) {
+        left: 75%;
+    }
 }
 
 .time-node.start {
 	//background-color: green;
 	left: 90%;
+	@media only screen and (max-width: 450px) {
+        left: 85%;
+    }
 }
 .time-node.end {
 	background-color: red;
 	left: 90%;
+	@media only screen and (max-width: 450px) {
+        left: 85%;
+    }
 }
 
 .node-container {
@@ -105,10 +115,10 @@
 		margin: 0px;
 		font-size: 1.8em;
 	}
-}
-
-.distance-label.end {
-	left: -98px;
+	@media only screen and (max-width: 450px) {
+        left: -98px;
+        font-size: 1.1em;
+    }
 }	
 
 br {

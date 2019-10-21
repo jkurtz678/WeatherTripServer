@@ -50,9 +50,28 @@ html {
         width: 80%;
         margin: auto;
         margin-top: 40px;
+        text-align: center;
+
+    }
+
+     @media only screen and (max-width: 450px) {
+        text-align: center;
+        h1  {
+            font-size: 6em; 
+        }
+        h3  {
+            font-size: 1.8em; 
+        }
     }
 
 }
+
+ .IIV::-webkit-media-controls-play-button,
+ .IIV::-webkit-media-controls-start-playback-button {
+     opacity: 0;
+     pointer-events: none;
+     width: 5px;
+ }
 
 .progress-container {
     text-align: left;

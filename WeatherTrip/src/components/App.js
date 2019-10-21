@@ -88,7 +88,7 @@ class App extends React.Component {
 			<div className="page-container">
 				<div className="video-background">
 					<div className="video-foreground">
-						<video ref="bgVid" className="video-iframe" playsinline>
+						<video ref="bgVid" className="video-iframe" muted playsInline>
 							<source src="./asphalt.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
