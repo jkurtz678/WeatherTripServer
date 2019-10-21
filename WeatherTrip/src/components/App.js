@@ -88,7 +88,7 @@ class App extends React.Component {
 			<div className="page-container">
 				<div className="video-background">
 					<div className="video-foreground">
-						<video ref="bgVid" className="video-iframe">
+						<video ref="bgVid" className="video-iframe" playsinline>
 							<source src="./asphalt.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
@@ -108,7 +108,12 @@ class App extends React.Component {
 						>
 							Invalid route locations!
 						</ErrorMessage>
-						<div className={ "progress-container " + (this.state.loading ? "" : "hidden")}>
+						<div
+							className={
+								"progress-container " +
+								(this.state.loading ? "" : "hidden")
+							}
+						>
 							<Loader
 								type="Puff"
 								color="white"
