@@ -53,7 +53,7 @@ class SearchBar extends React.Component {
 							/>
 						</div>
 					</div>
-					<input type="submit" value="Build route" className="search-button"/>
+					<input type="submit" value="Build" className="search-button"/>
 				</form>
 			</div>
 		);
