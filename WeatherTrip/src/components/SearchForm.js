@@ -28,12 +28,14 @@ class SearchBar extends React.Component {
 	render() {
 		return (
 			<div className="search-container">
-				<h3>Enter your trip (must be US cities):</h3>
+				<h3>Enter your trip:</h3>
+				<h4>- Must be US cities</h4>
+				<h4>- For best results, format input "city, state"</h4>
 				<form onSubmit={this.onFormSubmit}>
 					<div className="input-container">
 						<div>
 							<h4>Start:</h4>
-							<h4>Destination:</h4>
+							<h4>End:</h4>
 						</div>
 						<div>
 							<input

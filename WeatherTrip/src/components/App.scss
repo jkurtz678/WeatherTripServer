@@ -77,7 +77,8 @@ html {
     text-align: left;
     margin-left: 20%;
     h3 {
-        font-size: 1.8em;
+        margin: 11px 0px;
+        font-size: 1.6em;
     }
     @media only screen and (max-width: 909px) {
         width: 80%;
@@ -105,6 +106,8 @@ html {
 .error {
     margin-top: 40px;
     font-size: 1.7em;
+    text-align: left;
+    margin-left: 20%;
 }
 
 .footer {

@@ -16,7 +16,7 @@ module.exports = (app, uscities) => {
 				}
 			})
 			.then(response => {
-				console.log("getting cities list...")
+				console.log("getting cities list...");
 				try {
 					getCitiesList(response, 32, cities => {
 						//console.log("cities:", cities);
@@ -26,7 +26,7 @@ module.exports = (app, uscities) => {
 							console.log("route metrics:", routeMetrics);
 							getWeather(routeMetrics, weatherResults => {
 								res.status(200).send(weatherResults);
-							})
+							});
 						});
 						//res.status(200).send(best_cities);
 					});
@@ -48,12 +48,38 @@ module.exports = (app, uscities) => {
 			})
 			.then(response => {
 				console.log("sending location response...");
-				try {
-					res.status(200).send(response.data.results[0].position);
-				}
-				catch(err){
-					console.log("ERROR: unable to get location from TOMTOM")
-					res.status(500).send(err);
+				const res_city = response.data.results[0];
+
+				console.log(response.data.results);
+				if (
+					typeof res_city.position.lat === "undefined" ||
+					typeof res_city.position.lon === "undefined" ||
+					typeof res_city.address.countrySubdivision ===
+						"undefined" ||
+					typeof res_city.address.countryTertiarySubdivision ===
+						"undefined"
+				) {
+					console.log(
+						"Unable to get information for given location!"
+					);
+					res.status(404).send();
+				} else {
+					const city = {};
+
+					city["lat"] = res_city.position.lat;
+					city["lon"] = res_city.position.lon;
+					city["state"] = res_city.address.countrySubdivision;
+					city["city"] = res_city.address.countryTertiarySubdivision;
+					console.log("city before send:", city);
+
+					try {
+						res.status(200).send(city);
+					} catch (err) {
+						console.log(
+							"ERROR: unable to get location from TOMTOM"
+						);
+						res.status(500).send(err);
+					}
 				}
 			})
 			.catch(err => {
@@ -95,7 +121,6 @@ module.exports = (app, uscities) => {
 				summary: "clear",
 				time: "3:47pm",
 				military_time: "15:47"
-
 			},
 			{
 				city: "Santa Barbara",

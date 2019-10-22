@@ -17,7 +17,8 @@ class App extends React.Component {
 		routePoints: [],
 		showLocations: false,
 		showError: false,
-		loading: false
+		loading: false,
+		loadingMessage: ""
 	};
 
 	getTrip = async geoPair => {
@@ -32,46 +33,77 @@ class App extends React.Component {
 
 	onSearchSubmit = async (start, end) => {
 		console.log("sending location request...");
-		this.startBackground();
-		this.setState({
-			showLocations: false,
-			showError: false,
-			loading: true
-		});
-		//const path = "/location/" + start;
-		//console.log(path);
-		//console.log("end:", end);
-		try {
-			const response = await axios.all([
-				axios.get(/location/ + start),
-				axios.get(/location/ + end)
-			]);
-
-			console.log("REACT: location response:", response);
-			const geoPair =
-				response[0].data.lat +
-				"," +
-				response[0].data.lon +
-				":" +
-				response[1].data.lat +
-				"," +
-				response[1].data.lon;
-
-			const cityResponse = await axios.get("/trip/" + geoPair);
-			console.log(cityResponse);
-			this.setState({
-				routePoints: cityResponse.data,
-				showLocations: true,
-				showError: false,
-				loading: false
-			});
-		} catch {
-			console.log("REACT ERROR");
+		if (start === "" || end === "") {
 			this.setState({
 				showError: true,
 				showLocations: false,
 				loading: false
 			});
+		} else {
+			this.setState({
+				showLocations: false,
+				showError: false,
+				loading: true,
+				loadingMessage: <h3>Verifying locations</h3>
+			});
+			//const path = "/location/" + start;
+			//console.log(path);
+			//console.log("end:", end);
+			try {
+				const response = await axios.all([
+					axios.get(/location/ + start),
+					axios.get(/location/ + end)
+				]);
+
+				console.log("REACT: location response:", response);
+				if (response[0].status !== 200 || response[0].status !== 200) {
+					this.setState({
+						showError: true,
+						showLocations: false,
+						loading: false
+					});
+				} else {
+					const startCity =
+						response[0].data.city + ", " + response[0].data.state;
+					const endCity =
+						response[1].data.city + ", " + response[1].data.state;
+
+					this.setState({
+						loadingMessage: (
+							<div>
+								<h3>Building route:</h3>
+								<h3>{startCity + " -> " + endCity}</h3>
+							</div>
+						)
+					});
+					this.startBackground();
+
+					const geoPair =
+						response[0].data.lat +
+						"," +
+						response[0].data.lon +
+						":" +
+						response[1].data.lat +
+						"," +
+						response[1].data.lon;
+
+					const cityResponse = await axios.get("/trip/" + geoPair);
+					console.log(cityResponse);
+					this.setState({
+						routePoints: cityResponse.data,
+						showLocations: true,
+						showError: false,
+						loading: false
+					});
+				}
+			} catch {
+				console.log("REACT ERROR");
+				this.setState({
+					showError: true,
+					showLocations: false,
+					loading: false
+				});
+			}
 		}
 	};
 
@@ -88,7 +120,12 @@ class App extends React.Component {
 			<div className="page-container">
 				<div className="video-background">
 					<div className="video-foreground">
-						<video ref="bgVid" className="video-iframe" muted playsInline>
+						<video
+							ref="bgVid"
+							className="video-iframe"
+							muted
+							playsInline
+						>
 							<source src="./asphalt.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
@@ -103,10 +140,14 @@ class App extends React.Component {
 						<SearchForm onFormSubmit={this.onSearchSubmit} />
 						{/*<button onClick={this.onClickTwo}>Test</button>*/}
 						<ErrorMessage
-							className="error"
+							className={
+								"error" + (this.state.showError ? "" : "hidden")
+							}
 							pose={this.state.showError ? "visible" : "hidden"}
 						>
-							Invalid route locations!
+							Unable to find cities! <br /> For best results enter
+							cities in city,state pair <br /> e.g. Seattle,
+							Washington
 						</ErrorMessage>
 						<div
 							className={
@@ -120,7 +161,7 @@ class App extends React.Component {
 								height={100}
 								width={100}
 							/>
-							<h3>Building route</h3>
+							{this.state.loadingMessage}
 							<h3>Should take 8-15 seconds</h3>
 						</div>
 					</div>
