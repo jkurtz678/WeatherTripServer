@@ -31,7 +31,8 @@ class App extends React.Component {
 		this.refs.bgVid.play();
 	};
 
-	onSearchSubmit = async (start, end) => {
+	onSearchSubmit = async (start, end, dateTime) => {
+		console.log("datetime in app:", dateTime);
 		console.log("sending location request...");
 		if (start === "" || end === "") {
 			this.setState({
@@ -73,6 +74,7 @@ class App extends React.Component {
 							<div>
 								<h3>Building route:</h3>
 								<h3>{startCity + " -> " + endCity}</h3>
+								<h3>Should take 8-15 seconds</h3>
 							</div>
 						)
 					});
@@ -87,7 +89,7 @@ class App extends React.Component {
 						"," +
 						response[1].data.lon;
 
-					const cityResponse = await axios.get("/trip/" + geoPair);
+					const cityResponse = await axios.get("/trip/" + geoPair + "/" + dateTime);
 					console.log(cityResponse);
 					this.setState({
 						routePoints: cityResponse.data,
@@ -162,7 +164,6 @@ class App extends React.Component {
 								width={100}
 							/>
 							{this.state.loadingMessage}
-							<h3>Should take 8-15 seconds</h3>
 						</div>
 					</div>
 					<div className="route-container">

@@ -60,8 +60,6 @@ const Location = ({ location, nodeType }) => {
 		backgroundImage: `url(${imgPath}${imageKey[location.icon] ||
 			"clear.jpeg"})`
 	};
-
-	console.log(timeBubbleStyle);
 	return (
 		<div className="row-container">
 			<div className={"distance-label " + nodeClass}>{distanceLabel}</div>

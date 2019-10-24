@@ -1,13 +1,14 @@
 const tomtom = require("../config/tomtom");
 const keys = require("../config/keys");
 
-async function getWaypointRoute(routeCoords, callback) {
+async function getWaypointRoute(routeCoords, departTime, callback, ) {
 	const response = await tomtom.get(
 		"/routing/1/calculateRoute/" + routeCoords + "/json",
 		{
 			params: {
 				key: keys.tomtomApiKey,
-				routeRepresentation: "summaryOnly"
+				routeRepresentation: "summaryOnly",
+				departAt: departTime
 			}
 		}
 	);
@@ -44,7 +45,7 @@ function getMiles(i) {
 	return Math.round(i * 0.000621371192);
 }
 
-function getRouteMetrics(best_cities, callback) {
+function getRouteMetrics(best_cities, departTime, callback ) {
 	let routeCoords = "";
 	for (const city of best_cities) {
 		let coords = city["latitude"] + "," + city["longitude"] + ":";
@@ -53,7 +54,7 @@ function getRouteMetrics(best_cities, callback) {
 	routeCoords = routeCoords.substring(0, routeCoords.length - 1);
 	console.log("routeCoords:", routeCoords);
 
-	getWaypointRoute(routeCoords, response => {
+	getWaypointRoute(routeCoords, departTime, response => {
 		console.log("waypoint route response:", response.data.routes[0].legs);
 		let totalDist = 0;
 		best_cities[0]["distance"] = 0;

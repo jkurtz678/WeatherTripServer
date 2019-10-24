@@ -1,12 +1,10 @@
-.search-container{
-	//width: 65%;
-	//margin: auto;
+.search-container {
 	margin-left: 20%;
 	text-align: left;
 	margin-top: 60px;
 	h3 {
 		margin: 10px 0px;
-		font-size:2.2em;
+		font-size: 2.2em;
 	}
 	h4 {
 		font-size: 1.6em;
@@ -16,22 +14,21 @@
 }
 
 input.location-search {
-	width: 160px;
+	width: 180px;
 	font-size: 1.5em;
 }
 
-
-.input-container{
+.input-container {
 	display: flex;
-	
+
 	h4 {
 		font-size: 1.6em;
-		margin: 17px 0px;	
+		margin: 17px 0px;
 		margin-top: 15px;
 		margin-bottom: 24px;
 		line-height: 20px;
 	}
-	input{ 
+	input {
 		margin: 10px 10px;
 		line-height: 20px;
 	}
@@ -40,5 +37,16 @@ input.location-search {
 input.search-button {
 	width: 100px;
 	text-decoration: none;
-	font-size: 4em;
+	font-size: 1.5em;
+}
+
+.input-boxes {
+	max-width: 296px;
+}
+
+.time-input-container {
+	display: flex;
+}
+.time-input {
+	margin-top: 50px;
 }

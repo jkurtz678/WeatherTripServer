@@ -7,12 +7,13 @@ const getRouteMetrics = require("../scripts/route_metrics");
 const getWeather = require("../scripts/weather");
 
 module.exports = (app, uscities) => {
-	app.get("/trip/:location", (req, res) => {
+	app.get("/trip/:location/:datetime", (req, res) => {
 		console.log("getting route data from TOMTOM:", req.params.location);
 		tomtom
 			.get("/routing/1/calculateRoute/" + req.params.location + "/json", {
 				params: {
-					key: keys.tomtomApiKey
+					key: keys.tomtomApiKey,
+					departAt: req.params.datetime
 				}
 			})
 			.then(response => {
@@ -22,7 +23,7 @@ module.exports = (app, uscities) => {
 						//console.log("cities:", cities);
 						const best_cities = getBestCities(cities, uscities);
 						console.log("getting route metrics...");
-						getRouteMetrics(best_cities, routeMetrics => {
+						getRouteMetrics(best_cities, req.params.datetime, routeMetrics => {
 							console.log("route metrics:", routeMetrics);
 							getWeather(routeMetrics, weatherResults => {
 								res.status(200).send(weatherResults);
