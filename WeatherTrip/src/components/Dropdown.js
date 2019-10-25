@@ -20,7 +20,7 @@ class Dropdown extends React.Component {
 
 	selectItem = (item) => {
 		this.setState({headerTitle: item.title, listOpen: false});
-		this.props.toggleItem(item.id, item.key, item.month, item.date);
+		this.props.toggleItem(item);
 	}
 
 	render() {
