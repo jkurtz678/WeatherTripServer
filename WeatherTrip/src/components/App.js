@@ -7,6 +7,8 @@ import posed from "react-pose";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
+const imgPath = process.env.PUBLIC_URL + "/assets/";
+
 const ErrorMessage = posed.div({
 	visible: { opacity: 1 },
 	hidden: { opacity: 0 }
@@ -136,8 +138,7 @@ class App extends React.Component {
 				<div className="app-container">
 					<div className="left-container">
 						<div className="title-container">
-							<h1>WeatherTrip</h1>
-							<h3>Weather conditions for the road ahead</h3>
+							<img src={imgPath+"title.png"} alt="WeatherTrip"/>
 						</div>
 						<SearchForm onFormSubmit={this.onSearchSubmit} />
 						{/*<button onClick={this.onClickTwo}>Test</button>*/}
